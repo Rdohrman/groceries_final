@@ -1,28 +1,35 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import { NavController, ToastController, AlertController } from 'ionic-angular';
 import { GroceriesServiceProvider } from '../../providers/groceries-service/groceries-service';
 import { InputDialogServiceProvider } from '../../providers/input-dialog-service/input-dialog-service';
 import { SocialSharing } from '@ionic-native/social-sharing';
-
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
 
+export class HomePage {
   title = "Grocery";
+  items = [];
+  errorMessage: string;
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, 
     public dataService: GroceriesServiceProvider, public inputDialogService: InputDialogServiceProvider, 
-    public socialSharing: SocialSharing) {
-
+    public socialSharing: SocialSharing, 
+    public dataService: dataService.dataChanged$.subscribe((dataChanged: boolean) => { this.loadItems(); 
+    });
   }
 
+  ionViewWillEnter() {
+    this.loadItems();
+}
   loadItems() {
-    return this.dataService.getItems();
+     this.dataService.getItems()
+     .subscribe(
+       items => this.items = items,
+       error => this. errorMessage = <any>error);
+
   }
 
   removeItem(item, index) {
