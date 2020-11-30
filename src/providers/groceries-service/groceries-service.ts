@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 /*
   Generated class for the GroceriesServiceProvider provider.
@@ -11,24 +12,60 @@ export class GroceriesServiceProvider {
 
   items = [];
 
-  constructor() {
+  constructor(public http: HttpClient) {
     console.log('Hello GroceriesServiceProvider Provider');
   }
+// below here is still being worked out. I'm not sure if I was supposed to get these lines from Github so I'm checking with instructor to see.
 
-  getItems() {
-    return this.items;
-  }
+//   this.dataChangeSubject = new Subject<boolean>();
+//   this.dataChanged$ = this.dataChangeSubject.asObservable();
+// }
 
-  removeItem(index) {
-    this.items.splice(index, 1);
-  }
+// getItems(): Observable<object[]> {
+//   return this.http.get(this.baseURL + '/api/groceries').pipe(
+//     map(this.extractData),
+//     catchError(this.handleError)
+//   );
+// }
 
-  addItem(item) {
-    this.items.push(item);
-  }
+// private extractData(res: Response){
+// let body = res;
+// return body || {};
+// }
 
-  editItem(item, index) {
-    this.items[index] = item;
-  }
+// private handleError(error: Response | any){
+// let errMsg: string;
+// if (error instanceof Response) {
+//   const err = error || '';
+//   errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+// } else {
+//   errMsg = error.message ? error.message : error.toString();
+// }
+// console.error(errMsg);
+// return Observable.throw(errMsg);
+// }
 
-}
+    // removeItem(id){
+    //   console.log("Removing item id: ", id);
+    //   this.http.delete(this.baseURL + "/api/groceries/" + id).subscribe(res => {
+    //     this.items = res;
+    //     this.dataChangeSubject.next(true);
+    //   });  
+    // }
+
+    // addItem(item){
+    //   console.log("Adding grocery item to database...");
+    //   this.http.post(this.baseURL + "/api/groceries", item).subscribe(res => {
+    //     this.items = res;
+    //     this.dataChangeSubject.next(true); 
+    //   });
+    // }
+
+    // editItem(item, id){
+    //   console.log("Editing grocery item: ", item);
+    //   this.http.put(this.baseURL + "/api/groceries/" + id, item).subscribe(res => {
+    //     this.items = res;
+    //     this.dataChangeSubject.next(true); 
+    //   }); 
+    // }
+

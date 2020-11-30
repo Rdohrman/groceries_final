@@ -15,7 +15,9 @@ export class HomePage {
 
   title = "Grocery";
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, public dataService: GroceriesServiceProvider, public inputDialogService: InputDialogServiceProvider, public socialSharing: SocialSharing) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, 
+    public dataService: GroceriesServiceProvider, public inputDialogService: InputDialogServiceProvider, 
+    public socialSharing: SocialSharing) {
 
   }
 
