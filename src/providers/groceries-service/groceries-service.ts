@@ -70,5 +70,4 @@ return Observable.throw(errMsg);
         this.items = res;
         this.dataChangeSubject.next(true); 
       }); 
-    }
-
+    }}

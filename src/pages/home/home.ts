@@ -16,8 +16,8 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, 
     public dataService: GroceriesServiceProvider, public inputDialogService: InputDialogServiceProvider, 
-    public socialSharing: SocialSharing, 
-    public dataService: dataService.dataChanged$.subscribe((dataChanged: boolean) => { this.loadItems(); 
+    public socialSharing: SocialSharing){
+      dataService.dataChanged$.subscribe((dataChanged: boolean) => { this.loadItems(); 
     });
   }
 
@@ -28,25 +28,25 @@ export class HomePage {
      this.dataService.getItems()
      .subscribe(
        items => this.items = items,
-       error => this. errorMessage = <any>error);
+       error => this.errorMessage = <any>error);
 
   }
 
-  removeItem(item, index) {
-    console.log("Removing Item - ", item, index);
+  removeItem(item) {
+    console.log("Removing Item - ", item.name);
     const toast = this.toastCtrl.create({
-      message: 'Removing Item - ' + index + " ...",
+      message: 'Removing Item - ' + item.name + " ...",
       duration: 3000
     });
     toast.present();
 
-    this.dataService.removeItem(index);  
+    this.dataService.removeItem(item._id);  
   }
 
-  shareItem(item, index) {
-    console.log("Sharing Item - ", item, index);
+  shareItem(item) {
+    console.log("Sharing Item - ", item.name);
     const toast = this.toastCtrl.create({
-      message: 'Sharing Item - ' + index + " ...",
+      message: 'Sharing Item - ' + item.name + " ...",
       duration: 3000
     });
 
@@ -64,14 +64,14 @@ export class HomePage {
 
   }
 
-  editItem(item, index) {
-    console.log("Edit Item - ", item, index);
+  editItem(item) {
+    console.log("Edit Item - ", item.name);
     const toast = this.toastCtrl.create({
-      message: 'Editing Item - ' + index + " ...",
+      message: 'Editing Item - ' + item.name + " ...",
       duration: 3000
     });
     toast.present();
-    this.inputDialogService.showPrompt(item, index);
+    this.inputDialogService.showPrompt(item);
   }  
 
   addItem() {
